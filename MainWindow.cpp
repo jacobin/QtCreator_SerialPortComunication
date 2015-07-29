@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "SerialPortThread.h"
 #include <QMessageBox>
-
+//构造函数
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),isEnterSend(true),isAutoEnter(true),historyIterator(inputHistory.end()),
     ui(new Ui::MainWindow)
