@@ -1,8 +1,8 @@
-#include "MainWindow.h"
+﻿#include "MainWindow.h"
 #include "ui_mainwindow.h"
 #include "SerialPortThread.h"
 #include <QMessageBox>
-//
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),isEnterSend(true),isAutoEnter(true),historyIterator(inputHistory.end()),
     ui(new Ui::MainWindow)
