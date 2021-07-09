@@ -1,4 +1,4 @@
-ï»¿#ifndef SERIALPORTTHREAD_H
+#ifndef SERIALPORTTHREAD_H
 #define SERIALPORTTHREAD_H
 #include <QThread>
 #include <QtSerialPort/QSerialPort>
@@ -8,35 +8,35 @@ class SerialPortThread:public QThread
 {
     Q_OBJECT
 public:
-    SerialPortThread();//æ„é€ å‡½æ•°
-    ~SerialPortThread();//ææ„å‡½æ•°
-    void setIsEnd(bool b);//è®¾ç½®çº¿ç¨‹æ˜¯å¦åœæ­¢æ ‡å¿—
-    bool getIsEnd();//è·å–çº¿ç¨‹æ˜¯å¦åœæ­¢çš„æ ‡å¿—
-    void setSerialPortNumber(const QString & portNum);//è®¾ç½®ä¸²å£å·
-    void setSerialPortBaudRate(int r);//è®¾ç½®æ³¢ç‰¹ç‡
-    void setSerialPortParity(QSerialPort::Parity p);//è®¾ç½®æ ¡éªŒä½
-    void setSerialPortDataBits(QSerialPort::DataBits d);//è®¾ç½®æ•°æ®ä½
-    void setSerialPortStopBits(QSerialPort::StopBits s);//è®¾ç½®åœæ­¢ä½
+    SerialPortThread();//¹¹Ôìº¯Êı
+    ~SerialPortThread();//Îö¹¹º¯Êı
+    void setIsEnd(bool b);//ÉèÖÃÏß³ÌÊÇ·ñÍ£Ö¹±êÖ¾
+    bool getIsEnd();//»ñÈ¡Ïß³ÌÊÇ·ñÍ£Ö¹µÄ±êÖ¾
+    void setSerialPortNumber(const QString & portNum);//ÉèÖÃ´®¿ÚºÅ
+    void setSerialPortBaudRate(int r);//ÉèÖÃ²¨ÌØÂÊ
+    void setSerialPortParity(QSerialPort::Parity p);//ÉèÖÃĞ£ÑéÎ»
+    void setSerialPortDataBits(QSerialPort::DataBits d);//ÉèÖÃÊı¾İÎ»
+    void setSerialPortStopBits(QSerialPort::StopBits s);//ÉèÖÃÍ£Ö¹Î»
 
-    void setSendFlag(bool b);//è®¾ç½®å‘é€ä¿¡æ¯çš„æ ‡å¿—
-    bool getSendFlag();//è·å–å‘é€ä¿¡æ¯çš„æ ‡å¿—
-    void setSendData(QByteArray send);//è®¾ç½®å‘é€æ•°æ®
-    bool getSendData();//è·å–å‘é€æ•°æ®
+    void setSendFlag(bool b);//ÉèÖÃ·¢ËÍĞÅÏ¢µÄ±êÖ¾
+    bool getSendFlag();//»ñÈ¡·¢ËÍĞÅÏ¢µÄ±êÖ¾
+    void setSendData(QByteArray send);//ÉèÖÃ·¢ËÍÊı¾İ
+    bool getSendData();//»ñÈ¡·¢ËÍÊı¾İ
 signals:
-    void serialPortOpenStatus(int status);//å‘é€ä¸²å£æ‰“å¼€çŠ¶æ€çš„ä¿¡å·
-    void serialPortReceivedData(QByteArray receivedData);//å‘é€ä¸²å£æ¥æ”¶åˆ°çš„æ•°æ®çš„ä¿¡å·
+    void serialPortOpenStatus(int status);//·¢ËÍ´®¿Ú´ò¿ª×´Ì¬µÄĞÅºÅ
+    void serialPortReceivedData(QByteArray receivedData);//·¢ËÍ´®¿Ú½ÓÊÕµ½µÄÊı¾İµÄĞÅºÅ
 protected:
-    void run();//çº¿ç¨‹runå‡½æ•°
+    void run();//Ïß³Ìrunº¯Êı
 private:
-    bool isEnd;//çº¿ç¨‹åœæ­¢æ ‡å¿—
-    QByteArray receivedData;//æ¥æ”¶çš„æ•°æ®
-    QByteArray sendData;//å‘é€çš„æ•°æ®
-    bool sendFlag;//å‘é€æ ‡å¿—
-    QString serialPortNumber;//ä¸²å£å·
-    int baudRate;//æ³¢ç‰¹ç‡
-    QSerialPort::Parity parity;//æ ¡éªŒä½
-    QSerialPort::DataBits dataBits;//æ•°æ®ä½
-    QSerialPort::StopBits stopBits;//åœæ­¢ä½
+    bool isEnd;//Ïß³ÌÍ£Ö¹±êÖ¾
+    QByteArray receivedData;//½ÓÊÕµÄÊı¾İ
+    QByteArray sendData;//·¢ËÍµÄÊı¾İ
+    bool sendFlag;//·¢ËÍ±êÖ¾
+    QString serialPortNumber;//´®¿ÚºÅ
+    int baudRate;//²¨ÌØÂÊ
+    QSerialPort::Parity parity;//Ğ£ÑéÎ»
+    QSerialPort::DataBits dataBits;//Êı¾İÎ»
+    QSerialPort::StopBits stopBits;//Í£Ö¹Î»
 };
 
 #endif // SERIALPORTTHREAD_H

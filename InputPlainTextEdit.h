@@ -1,5 +1,5 @@
 /*
- * è¿™ä¸ªæ–‡ä»¶æ˜¯å‘½ä»¤è¾“å…¥æ¡†çš„ç±»ï¼Œé‡è½½äº†æŒ‰é”®äº‹ä»¶å“åº”ç­‰
+ * Õâ¸öÎÄ¼şÊÇÃüÁîÊäÈë¿òµÄÀà£¬ÖØÔØÁË°´¼üÊÂ¼şÏìÓ¦µÈ
 */
 #ifndef INPUTPLAINTEXTEDIT_H
 #define INPUTPLAINTEXTEDIT_H
@@ -11,16 +11,16 @@ class InputPlainTextEdit:public QPlainTextEdit
 public:
     explicit InputPlainTextEdit(QWidget* parent = 0);
     ~InputPlainTextEdit();
-    void keyPressEvent(QKeyEvent * event);//æŒ‰é”®å“åº”å‡½æ•°
+    void keyPressEvent(QKeyEvent * event);//°´¼üÏìÓ¦º¯Êı
 
-    void setIsEnterSend(bool b);//è®¾ç½®æ˜¯å¦å›è½¦å‘é€ä¿¡æ¯
+    void setIsEnterSend(bool b);//ÉèÖÃÊÇ·ñ»Ø³µ·¢ËÍĞÅÏ¢
 
 signals:
-    void sendMessage();//å‘é€å‘é€ä¿¡æ¯çš„ä¿¡å·ç»™ä¸»ç•Œé¢
-    void arrowMessage(int array);//å‘é€ç‚¹å‡»ä¸Šä¸‹ç®­å¤´çš„ä¿¡å·ç»™ä¸»ç•Œé¢
+    void sendMessage();//·¢ËÍ·¢ËÍĞÅÏ¢µÄĞÅºÅ¸øÖ÷½çÃæ
+    void arrowMessage(int array);//·¢ËÍµã»÷ÉÏÏÂ¼ıÍ·µÄĞÅºÅ¸øÖ÷½çÃæ
 
 private:
-    bool isEnterSend;//å›è½¦å‘é€ä¿¡æ¯æ ‡å¿—ï¼Œtrueè¡¨ç¤ºå›è½¦å‘é€
+    bool isEnterSend;//»Ø³µ·¢ËÍĞÅÏ¢±êÖ¾£¬true±íÊ¾»Ø³µ·¢ËÍ
 
 };
 

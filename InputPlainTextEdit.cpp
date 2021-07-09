@@ -9,16 +9,17 @@ InputPlainTextEdit::~InputPlainTextEdit()
 {
 
 }
-//è®¾ç½®æ˜¯å¦å›è½¦å‘é€ä¿¡æ¯
+
+// ÉèÖÃÊÇ·ñ»Ø³µ·¢ËÍĞÅÏ¢
 void InputPlainTextEdit::setIsEnterSend(bool b)
 {
     isEnterSend = b;
 }
 
-//æŒ‰é”®å“åº”å‡½æ•°
+//°´¼üÏìÓ¦º¯Êı
 void InputPlainTextEdit::keyPressEvent(QKeyEvent *event)
 {
-    QPlainTextEdit::keyPressEvent(event);//å¿…é¡»å¢åŠ è¿™ä¸ªï¼Œå¦åˆ™æ— æ³•è¾“å…¥æ¡†æ­£å¸¸ç¼–è¾‘
+    QPlainTextEdit::keyPressEvent(event);//±ØĞëÔö¼ÓÕâ¸ö£¬·ñÔòÎŞ·¨ÊäÈë¿òÕı³£±à¼­
     int key = event->key();
 
     if(key == Qt::Key_Up)
@@ -28,7 +29,7 @@ void InputPlainTextEdit::keyPressEvent(QKeyEvent *event)
 
     if(!isEnterSend)return;
 
-    if(key == Qt::Key_Return || key == Qt::Key_Enter)//åˆ†åˆ«æ˜¯å¤§å°é”®ç›˜çš„å›è½¦
+    if(key == Qt::Key_Return || key == Qt::Key_Enter)//·Ö±ğÊÇ´óĞ¡¼üÅÌµÄ»Ø³µ
     {
         emit sendMessage();
     }

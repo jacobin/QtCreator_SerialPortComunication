@@ -1,4 +1,4 @@
-ï»¿#include "SerialPortThread.h"
+#include "SerialPortThread.h"
 #include <iostream>
 SerialPortThread::SerialPortThread():isEnd(false),serialPortNumber("COM1"),
     baudRate(9600),parity(QSerialPort::NoParity),dataBits(QSerialPort::Data8),
@@ -11,27 +11,27 @@ SerialPortThread::~SerialPortThread()
 {
 
 }
-//è®¾ç½®ä¸²å£å·
+//ÉèÖÃ´®¿ÚºÅ
 void SerialPortThread::setSerialPortNumber(const QString & portNum)
 {
     serialPortNumber = portNum;
 }
-//è®¾ç½®æ³¢ç‰¹ç‡
+//ÉèÖÃ²¨ÌØÂÊ
 void SerialPortThread::setSerialPortBaudRate(int r)
 {
     baudRate = r;
 }
-//è®¾ç½®æ ¡éªŒä½
+//ÉèÖÃĞ£ÑéÎ»
 void SerialPortThread::setSerialPortParity(QSerialPort::Parity p)
 {
     parity = p;
 }
-//è®¾ç½®æ•°æ®ä½
+//ÉèÖÃÊı¾İÎ»
 void SerialPortThread::setSerialPortDataBits(QSerialPort::DataBits d)
 {
     dataBits = d;
 }
-//è®¾ç½®åœæ­¢ä½
+//ÉèÖÃÍ£Ö¹Î»
 void SerialPortThread::setSerialPortStopBits(QSerialPort::StopBits s)
 {
     stopBits = s;
@@ -39,7 +39,7 @@ void SerialPortThread::setSerialPortStopBits(QSerialPort::StopBits s)
 
 void SerialPortThread::run()
 {
-    //æ‰“å¼€ä¸²å£
+    //´ò¿ª´®¿Ú
     QSerialPort *serialPort = new QSerialPort;
     serialPort->setPortName(serialPortNumber);
     serialPort->setBaudRate(baudRate);
@@ -50,33 +50,33 @@ void SerialPortThread::run()
 
     if(!serialPort->open(QIODevice::ReadWrite))
     {
-        //ä¸²å£æ‰“å¼€ä¸æˆåŠŸ
+        //´®¿Ú´ò¿ª²»³É¹¦
         isEnd = true;
         emit serialPortOpenStatus(-1);
-        delete serialPort;//æ¸…ç†èµ„æº
+        delete serialPort;//ÇåÀí×ÊÔ´
         return;
     }
     else
-    {//æ‰“å¼€æˆåŠŸ
+    {//´ò¿ª³É¹¦
         isEnd = false;
         emit serialPortOpenStatus(1);
     }
 
     while(!isEnd)
-    {//è¯»ä¸²å£
+    {//¶Á´®¿Ú
         if(serialPort->waitForReadyRead(50))
         {
            receivedData = serialPort->readAll();
            std::cout<<"receive data:"<<receivedData.toStdString()<<std::endl;
            emit serialPortReceivedData(receivedData);
         }
-        //å¦‚æœæœ‰æ•°æ®è¦å‘é€
+        //Èç¹ûÓĞÊı¾İÒª·¢ËÍ
         if(sendFlag)
-        {//å‘é€æ•°æ®
+        {//·¢ËÍÊı¾İ
             serialPort->write(sendData);
             sendFlag = false;
-            if(serialPort->waitForBytesWritten(50))//æ¥æ”¶å›åº”
-            {//å°†å›åº”å…¨éƒ¨æ¥æ”¶
+            if(serialPort->waitForBytesWritten(50))//½ÓÊÕ»ØÓ¦
+            {//½«»ØÓ¦È«²¿½ÓÊÕ
                 receivedData = serialPort->readAll();
                 while (serialPort->waitForReadyRead(100))
                     receivedData += serialPort->readAll();
@@ -85,34 +85,34 @@ void SerialPortThread::run()
             }
         }
     }
-    //å…³é—­ä¸²å£
+    //¹Ø±Õ´®¿Ú
     if(serialPort->isOpen())
         serialPort->close();
     isEnd = true;
     emit serialPortOpenStatus(0);
-    delete serialPort;//æ¸…ç†èµ„æº
+    delete serialPort;//ÇåÀí×ÊÔ´
 }
-//è·å–çº¿ç¨‹æ˜¯å¦åœæ­¢çš„æ ‡å¿—
+//»ñÈ¡Ïß³ÌÊÇ·ñÍ£Ö¹µÄ±êÖ¾
 bool SerialPortThread::getIsEnd()
 {
     return isEnd;
 }
-//è®¾ç½®çº¿ç¨‹æ˜¯å¦åœæ­¢æ ‡å¿—
+//ÉèÖÃÏß³ÌÊÇ·ñÍ£Ö¹±êÖ¾
 void SerialPortThread::setIsEnd(bool b)
 {
     isEnd = b;
 }
-//è®¾ç½®å‘é€ä¿¡æ¯çš„æ ‡å¿—
+//ÉèÖÃ·¢ËÍĞÅÏ¢µÄ±êÖ¾
 void SerialPortThread::setSendFlag(bool b)
 {
     sendFlag = b;
 }
-//è·å–å‘é€ä¿¡æ¯çš„æ ‡å¿—
+//»ñÈ¡·¢ËÍĞÅÏ¢µÄ±êÖ¾
 bool SerialPortThread::getSendFlag()
 {
     return sendFlag;
 }
-//è®¾ç½®å‘é€æ•°æ®
+//ÉèÖÃ·¢ËÍÊı¾İ
 void SerialPortThread::setSendData(QByteArray send)
 {
     sendData = send;

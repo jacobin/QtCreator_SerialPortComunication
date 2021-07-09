@@ -1,4 +1,4 @@
-ï»¿#ifndef MAINWINDOW_H
+#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -16,29 +16,29 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void init();//è‡ªå®šä¹‰çš„åˆå§‹åŒ–å‡½æ•°
+    void init();//×Ô¶¨ÒåµÄ³õÊ¼»¯º¯Êı
 
 private slots:
 
-    void serialPortOpenStatus(int status);//æ¥æ”¶ä¸²å£æ˜¯å¦æ‰“å¼€çš„æ§½
-    void serialPortReceivedData(QByteArray receivedData);//æ¥æ”¶ä¸²å£çº¿ç¨‹ä¼ æ¥çš„æ•°æ®çš„æ§½
-    void sendMessage();//æ¥æ”¶è¾“å…¥æ¡†å›è½¦å‘é€ä¿¡æ¯çš„æ§½
-    void arrowMessage(int arrow);//æ¥æ”¶è¾“å…¥æ¡†ä¸Šä¸‹ç®­å¤´çš„æ§½
-    void on_onOffSerialPortButton_clicked();//å¼€å…³ä¸²å£æŒ‰é’®çš„æ§½
-    void on_sendMessageButton_clicked();//å‘é€ä¿¡æ¯æŒ‰é’®çš„æ§½
-    void on_enterSendCheckBox_clicked();//è®¾ç½®å›è½¦å‘é€çš„æ£€æŸ¥æ¡†çš„æ§½
-    void on_autoEnterCheckBox_clicked();//è®¾ç½®å‘é€çš„æ•°æ®è‡ªåŠ¨æ¢è¡Œçš„æ£€æŸ¥æ¡†çš„æ§½
-    void on_clearShowButton_clicked();//æ¸…é™¤æ˜¾ç¤ºä¿¡æ¯æŒ‰é’®çš„æ§½
-    void on_clearInputButton_clicked();//æ¸…é™¤è¾“å…¥ä¿¡æ¯æŒ‰é’®çš„æ§½
+    void serialPortOpenStatus(int status);//½ÓÊÕ´®¿ÚÊÇ·ñ´ò¿ªµÄ²Û
+    void serialPortReceivedData(QByteArray receivedData);//½ÓÊÕ´®¿ÚÏß³Ì´«À´µÄÊı¾İµÄ²Û
+    void sendMessage();//½ÓÊÕÊäÈë¿ò»Ø³µ·¢ËÍĞÅÏ¢µÄ²Û
+    void arrowMessage(int arrow);//½ÓÊÕÊäÈë¿òÉÏÏÂ¼ıÍ·µÄ²Û
+    void on_onOffSerialPortButton_clicked();//¿ª¹Ø´®¿Ú°´Å¥µÄ²Û
+    void on_sendMessageButton_clicked();//·¢ËÍĞÅÏ¢°´Å¥µÄ²Û
+    void on_enterSendCheckBox_clicked();//ÉèÖÃ»Ø³µ·¢ËÍµÄ¼ì²é¿òµÄ²Û
+    void on_autoEnterCheckBox_clicked();//ÉèÖÃ·¢ËÍµÄÊı¾İ×Ô¶¯»»ĞĞµÄ¼ì²é¿òµÄ²Û
+    void on_clearShowButton_clicked();//Çå³ıÏÔÊ¾ĞÅÏ¢°´Å¥µÄ²Û
+    void on_clearInputButton_clicked();//Çå³ıÊäÈëĞÅÏ¢°´Å¥µÄ²Û
 
 private:
-    Ui::MainWindow *ui;//uiæ–‡ä»¶
-    SerialPortThread* serialPortThread;//ä¸²å£çº¿ç¨‹
-    bool isEnterSend;//æ˜¯å¦å›è½¦å‘é€çš„æ ‡å¿—
-    bool isAutoEnter;//æ˜¯å¦å‘é€æ•°æ®æ—¶è‡ªåŠ¨æ¢è¡Œçš„æ ‡å¿—
-    QVector<QString> inputHistory;//è¾“å…¥å†å²çš„å‘é‡
-    QVector<QString>::iterator historyIterator;//æŒ‡å‘æŸä¸ªå†å²è¾“å…¥å­—ç¬¦ä¸²
-    QString showString;//æ˜¾ç¤ºçš„å­—ç¬¦ä¸²
+    Ui::MainWindow *ui;//uiÎÄ¼ş
+    SerialPortThread* serialPortThread;//´®¿ÚÏß³Ì
+    bool isEnterSend;//ÊÇ·ñ»Ø³µ·¢ËÍµÄ±êÖ¾
+    bool isAutoEnter;//ÊÇ·ñ·¢ËÍÊı¾İÊ±×Ô¶¯»»ĞĞµÄ±êÖ¾
+    QVector<QString> inputHistory;//ÊäÈëÀúÊ·µÄÏòÁ¿
+    QVector<QString>::iterator historyIterator;//Ö¸ÏòÄ³¸öÀúÊ·ÊäÈë×Ö·û´®
+    QString showString;//ÏÔÊ¾µÄ×Ö·û´®
 
 };
 

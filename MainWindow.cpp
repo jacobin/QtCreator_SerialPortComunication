@@ -1,8 +1,8 @@
-ï»¿#include "MainWindow.h"
+#include "MainWindow.h"
 #include "ui_mainwindow.h"
 #include "SerialPortThread.h"
 #include <QMessageBox>
-//æž„é€ å‡½æ•°
+//¹¹Ôìº¯Êý
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),isEnterSend(true),isAutoEnter(true),historyIterator(inputHistory.end()),
     ui(new Ui::MainWindow)
@@ -17,11 +17,11 @@ MainWindow::~MainWindow()
     if(serialPortThread->isRunning())
     {
         serialPortThread->setIsEnd(true);
-        serialPortThread->wait();//qtçš„waitç±»ä¼¼äºŽjoin()
+        serialPortThread->wait();//qtµÄwaitÀàËÆÓÚjoin()
     }
     delete serialPortThread;
 }
-//è‡ªå®šä¹‰çš„åˆå§‹åŒ–å‡½æ•°
+//×Ô¶¨ÒåµÄ³õÊ¼»¯º¯Êý
 void MainWindow::init()
 {
     connect(serialPortThread,SIGNAL(serialPortOpenStatus(int)),this,SLOT(serialPortOpenStatus(int)));
@@ -30,25 +30,25 @@ void MainWindow::init()
     connect(ui->inputPlainTextEdit,SIGNAL(arrowMessage(int)),this,SLOT(arrowMessage(int)));
 }
 
-//æŽ¥æ”¶ä¸²å£æ˜¯å¦æ‰“å¼€çš„æ§½
+//½ÓÊÕ´®¿ÚÊÇ·ñ´ò¿ªµÄ²Û
 void MainWindow::serialPortOpenStatus(int status)
 {
     switch(status)
     {
-    case -1://è¿™ä¸ªæ˜¯ç‚¹å‡»æ‰“å¼€æŒ‰é’®ï¼Œä½†æ˜¯å¤±è´¥çš„å“åº”
+    case -1://Õâ¸öÊÇµã»÷´ò¿ª°´Å¥£¬µ«ÊÇÊ§°ÜµÄÏìÓ¦
     {
-        ui->onOffSerialPortButton->setText(QStringLiteral("æ‰“å¼€ä¸²å£"));
+        ui->onOffSerialPortButton->setText(QStringLiteral("´ò¿ª´®¿Ú"));
         ui->serialPortComboBox->setEnabled(true);
         ui->baudRateComboBox->setEnabled(true);
         ui->parityComboBox->setEnabled(true);
         ui->dataBitsComboBox->setEnabled(true);
         ui->stopBitsComboBox->setEnabled(true);
-        QMessageBox::warning(NULL, QStringLiteral("é”™è¯¯"), QStringLiteral("ä¸²å£å·ä¸å­˜åœ¨æˆ–è€…è¢«å…¶ä»–ç¨‹åºå ç”¨!"), QMessageBox::Ok, QMessageBox::Ok);
+        QMessageBox::warning(NULL, QStringLiteral("´íÎó"), QStringLiteral("´®¿ÚºÅ²»´æÔÚ»òÕß±»ÆäËû³ÌÐòÕ¼ÓÃ!"), QMessageBox::Ok, QMessageBox::Ok);
         break;
     }
-    case 0://æ­£å¸¸å…³é—­ä¸²å£
+    case 0://Õý³£¹Ø±Õ´®¿Ú
     {
-        ui->onOffSerialPortButton->setText(QStringLiteral("æ‰“å¼€ä¸²å£"));
+        ui->onOffSerialPortButton->setText(QStringLiteral("´ò¿ª´®¿Ú"));
         ui->serialPortComboBox->setEnabled(true);
         ui->baudRateComboBox->setEnabled(true);
         ui->parityComboBox->setEnabled(true);
@@ -56,9 +56,9 @@ void MainWindow::serialPortOpenStatus(int status)
         ui->stopBitsComboBox->setEnabled(true);
         break;
     }
-    case 1://æˆåŠŸæ‰“å¼€ä¸²å£
+    case 1://³É¹¦´ò¿ª´®¿Ú
     {
-        ui->onOffSerialPortButton->setText(QStringLiteral("å…³é—­ä¸²å£"));
+        ui->onOffSerialPortButton->setText(QStringLiteral("¹Ø±Õ´®¿Ú"));
         ui->serialPortComboBox->setEnabled(false);
         ui->baudRateComboBox->setEnabled(false);
         ui->parityComboBox->setEnabled(false);
@@ -71,25 +71,25 @@ void MainWindow::serialPortOpenStatus(int status)
 
     }
 }
-//æŽ¥æ”¶ä¸²å£çº¿ç¨‹ä¼ æ¥çš„æ•°æ®çš„æ§½
+//½ÓÊÕ´®¿ÚÏß³Ì´«À´µÄÊý¾ÝµÄ²Û
 void MainWindow::serialPortReceivedData(QByteArray receivedData)
 {
     showString.append(receivedData);
     ui->textBrowser->clear();
     ui->textBrowser->append(showString);
 }
-//æŽ¥æ”¶è¾“å…¥æ¡†å›žè½¦å‘é€ä¿¡æ¯çš„æ§½
+//½ÓÊÕÊäÈë¿ò»Ø³µ·¢ËÍÐÅÏ¢µÄ²Û
 void MainWindow::sendMessage()
 {
-    if(!serialPortThread->isRunning())return;//å¦‚æžœä¸²å£çº¿ç¨‹æ²¡æœ‰è¿è¡Œï¼Œä¸å‘é€æ•°æ®
+    if(!serialPortThread->isRunning())return;//Èç¹û´®¿ÚÏß³ÌÃ»ÓÐÔËÐÐ£¬²»·¢ËÍÊý¾Ý
     QString sendStr = ui->inputPlainTextEdit->toPlainText();
     inputHistory.push_back(sendStr.trimmed());
-    historyIterator = inputHistory.end();//æ¯ä¸€æ¬¡å‘é€æ•°æ®ï¼Œéƒ½è¦å°†å…¶ç½®end()
+    historyIterator = inputHistory.end();//Ã¿Ò»´Î·¢ËÍÊý¾Ý£¬¶¼Òª½«ÆäÖÃend()
     ui->inputPlainTextEdit->clear();
     serialPortThread->setSendData(sendStr.toUtf8());//QByteArray()
     serialPortThread->setSendFlag(true);
 }
-//æŽ¥æ”¶è¾“å…¥æ¡†ä¸Šä¸‹ç®­å¤´çš„æ§½
+//½ÓÊÕÊäÈë¿òÉÏÏÂ¼ýÍ·µÄ²Û
 void MainWindow::arrowMessage(int arrow)
 {
     if(inputHistory.isEmpty())
@@ -111,18 +111,18 @@ void MainWindow::arrowMessage(int arrow)
     }
 
     ui->inputPlainTextEdit->clear();
-    ui->inputPlainTextEdit->appendPlainText(*historyIterator);//æ˜¾ç¤ºåŽ†å²è¾“å…¥
+    ui->inputPlainTextEdit->appendPlainText(*historyIterator);//ÏÔÊ¾ÀúÊ·ÊäÈë
 }
-//å¼€å…³ä¸²å£æŒ‰é’®çš„æ§½
+//¿ª¹Ø´®¿Ú°´Å¥µÄ²Û
 void MainWindow::on_onOffSerialPortButton_clicked()
 {
-    //å¦‚æžœæ­£åœ¨è¿è¡Œï¼Œåˆ™å…³é—­ä¸²å£çº¿ç¨‹
+    //Èç¹ûÕýÔÚÔËÐÐ£¬Ôò¹Ø±Õ´®¿ÚÏß³Ì
     if(serialPortThread->isRunning())
     {
         serialPortThread->setIsEnd(true);
     }
-    else//æ‰“å¼€ä¸²å£çº¿ç¨‹
-    {//é¦–å…ˆè®¾ç½®ä¸²å£å‚æ•°
+    else//´ò¿ª´®¿ÚÏß³Ì
+    {//Ê×ÏÈÉèÖÃ´®¿Ú²ÎÊý
         serialPortThread->setSerialPortNumber(ui->serialPortComboBox->currentText());
 
         serialPortThread->setSerialPortBaudRate(ui->baudRateComboBox->currentText().toInt());
@@ -191,43 +191,43 @@ void MainWindow::on_onOffSerialPortButton_clicked()
             break;
         }
         serialPortThread->setSerialPortStopBits(stopBits);
-        serialPortThread->setIsEnd(false);//è®¾ç½®åœæ­¢æ ‡å¿—ä¸ºfalse
-        serialPortThread->start();//å¼€å§‹çº¿ç¨‹
+        serialPortThread->setIsEnd(false);//ÉèÖÃÍ£Ö¹±êÖ¾Îªfalse
+        serialPortThread->start();//¿ªÊ¼Ïß³Ì
     }
 
 }
-//å‘é€ä¿¡æ¯æŒ‰é’®çš„æ§½
+//·¢ËÍÐÅÏ¢°´Å¥µÄ²Û
 void MainWindow::on_sendMessageButton_clicked()
 {
-    if(!serialPortThread->isRunning())return;//å¦‚æžœä¸²å£çº¿ç¨‹æ²¡æœ‰è¿è¡Œï¼Œä¸å‘é€æ•°æ®
+    if(!serialPortThread->isRunning())return;//Èç¹û´®¿ÚÏß³ÌÃ»ÓÐÔËÐÐ£¬²»·¢ËÍÊý¾Ý
     QString sendStr = ui->inputPlainTextEdit->toPlainText();
-    inputHistory.push_back(sendStr.trimmed());//æ·»åŠ åŽ†å²æŒ‡ä»¤
+    inputHistory.push_back(sendStr.trimmed());//Ìí¼ÓÀúÊ·Ö¸Áî
     historyIterator = inputHistory.end();
-    ui->inputPlainTextEdit->clear();//æ¸…ç©ºè¾“å…¥æ¡†
-    if(isAutoEnter)sendStr += "\n";//å¦‚æžœè‡ªåŠ¨æ¢è¡Œ
+    ui->inputPlainTextEdit->clear();//Çå¿ÕÊäÈë¿ò
+    if(isAutoEnter)sendStr += "\n";//Èç¹û×Ô¶¯»»ÐÐ
     serialPortThread->setSendData(sendStr.toUtf8());//QByteArray()
     serialPortThread->setSendFlag(true);
 }
 
-//è®¾ç½®å›žè½¦å‘é€çš„æ£€æŸ¥æ¡†çš„æ§½
+//ÉèÖÃ»Ø³µ·¢ËÍµÄ¼ì²é¿òµÄ²Û
 void MainWindow::on_enterSendCheckBox_clicked()
 {
     isEnterSend = ui->enterSendCheckBox->isChecked();
     ui->inputPlainTextEdit->setIsEnterSend(isEnterSend);
 }
-//è®¾ç½®å‘é€çš„æ•°æ®è‡ªåŠ¨æ¢è¡Œçš„æ£€æŸ¥æ¡†çš„æ§½
+//ÉèÖÃ·¢ËÍµÄÊý¾Ý×Ô¶¯»»ÐÐµÄ¼ì²é¿òµÄ²Û
 void MainWindow::on_autoEnterCheckBox_clicked()
 {
     isAutoEnter = ui->autoEnterCheckBox->isChecked();
 }
-//æ¸…é™¤æ˜¾ç¤ºä¿¡æ¯æŒ‰é’®çš„æ§½
+//Çå³ýÏÔÊ¾ÐÅÏ¢°´Å¥µÄ²Û
 void MainWindow::on_clearShowButton_clicked()
 {
     ui->textBrowser->clear();
     showString.clear();
 }
 
-//æ¸…é™¤è¾“å…¥ä¿¡æ¯æŒ‰é’®çš„æ§½
+//Çå³ýÊäÈëÐÅÏ¢°´Å¥µÄ²Û
 void MainWindow::on_clearInputButton_clicked()
 {
     ui->inputPlainTextEdit->clear();
